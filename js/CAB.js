@@ -1,4 +1,11 @@
 
+
+function foo(){
+    console.log('what a fuck!')
+}
+
+
+
 Function.prototyoe.myCall = function(context){
     context = context||window;
     context.fn = this;
