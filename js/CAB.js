@@ -1,4 +1,3 @@
-import { Context } from "mocha";
 
 Function.prototyoe.myCall = function(context){
     context = context||window;
