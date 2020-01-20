@@ -62,6 +62,11 @@ function Promise(executor) {
     }
 }
 
+/**
+ * 在原型上添加then方法
+ * @param {list} onFullfilled 保存着pendding的任务
+ * @param {list} onRejected 保存着拒绝的任务
+ */
 
 Promise.prototype.then = function (onFullfilled, onRejected) {
     let _this = this;
@@ -107,6 +112,7 @@ Promise.prototype.then = function (onFullfilled, onRejected) {
     });
     return promise2;
 };
+
 Promise.prototype.catch = function (errFn){
   return this.then(null, errFn);
 }
