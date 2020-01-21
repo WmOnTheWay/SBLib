@@ -56,3 +56,6 @@ function create(){
 	return res instanceof Object ? res:obj;
 	
 }
+
+
+export default tools;

@@ -26,3 +26,5 @@ function throttle(fn, delay,immediate) {
         }
     }
 }
+
+export default debounce;

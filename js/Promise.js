@@ -170,7 +170,8 @@ Promise.defer = Promise.deferred =  function(){
     })
     return dfd;
 }
-module.exports = Promise;
+
+export default Promise;
 
 var promisesAplusTests =  require("promises-aplus-tests");
 
