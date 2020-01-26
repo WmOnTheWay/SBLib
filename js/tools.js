@@ -11,6 +11,11 @@ function processString (s) {
     return new_arr.join('');
 }
 //字符串匹配
+/**
+ * 
+ * @param {string} S 
+ * @param {string} T 
+ */
 const find = (S, T) => {
     if (S.length < T.length) return -1
     for (let i = 0; i < S.length; i++) {
@@ -20,6 +25,10 @@ const find = (S, T) => {
   }
 
 //判断是否是一个正确的网址
+/**
+ * 
+ * @param {string} url 
+ */
 function isUrl(url) {
 	const a = document.createElement('a')
 	a.href = url
