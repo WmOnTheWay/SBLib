@@ -86,7 +86,7 @@ if(typeof Object.assiGn !='function'){
 function listToTree(list){
 	let res = [];
 	let map = list.reduce((res,v)=(res[v.id]=v, res),{});
-	//浅拷贝过程
+	//利用浅拷贝
 	for(const item of list){
 		if(item.parentId==0){
 			res.push(item);
