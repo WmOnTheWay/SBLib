@@ -31,23 +31,7 @@ function isUrl(url) {
 	].find(x => !x) === undefined
 }
 
-//list转树
-function convert(list) {
-	const res = []
-	const map = list.reduce((res, v) => (res[v.id] = v, res), {})
-	for (const item of list) {
-		if (item.parentId === 0) {
-			res.push(item)
-			continue
-		}
-		if (item.parentId in map) {
-			const parent = map[item.parentId]
-			parent.children = parent.children || []
-			parent.children.push(item)
-		}
-	}
-	return res
-}
+
 //简易版new
 function create(){
 	var constructor = [].shift.call(arguments);
@@ -83,6 +67,29 @@ if(typeof Object.assiGn !='function'){
 		writable:true,
 		configurable:true
 	});
+}
+
+
+/**
+ * 列表转换属性，利用浅拷贝
+ * @param {Array} list 
+ */
+function listToTree(list){
+	let res = [];
+	let map = list.reduce((res,v)=(res[v.id]=v, res),{});
+	//浅拷贝过程
+	for(const item of list){
+		if(item.parentId==0){
+			res.push(item);
+			continue
+		}
+		if(item.parentId in map){
+			const parent = map[item.partentId];
+			parent.children = parent.children||[];
+			parent.children.push(item);
+		}
+	}
+	return res;
 }
 
 
