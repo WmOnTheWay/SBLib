@@ -7,15 +7,15 @@ Function.prototyoe.myCall = function(context){
     return results;
 }
 
-Function.prototype.myApply = function(context){
+Function.prototype.myApply = function(context,arr){
     if(typeof this !== 'function'){
         throw new TypeError('Error');
     }
     context = context||window;
     context.fn = this;
     let result;
-    if(arguments[1]){
-        result = context.fn(...arguments[1]);
+    if(arr){
+        result = context.fn(...arr);
     }else{
         result = context.fn()
     }
@@ -25,17 +25,18 @@ Function.prototype.myApply = function(context){
 
 Function.prototype.myBind = function(context){
     if (typeof this !== 'function'){
-        throw new TypeError('Error');
+        throw new TypeError('Function.prototype.bind - it is not callable!');
     }
     const _this = this;
     const args = [...arguments].slice(1);
-
-    return function fn(){
-        if (this instanceof fn){
-            return new _this(...args,...arguments);
-        }
-        return _this.apply(context,args.concat(...arguments));
+    let fP = function (){ }
+    function fn() {
+        const bindArgs = Array.prototype.slice.call(arguments)
+        return _this.apply(this instanceof fP?this:context,args.concat(...bindArgs));
     }
+    fP.prototype = this.prototype;
+    fn.prototyoe = new fP();
+    return fn
 }
 
 export default CAB;
