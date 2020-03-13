@@ -117,8 +117,11 @@ class yPromise {
         return this.then(null, errFn);
     }
     finally(fn) {
-        this.then(() => {fn();}, () => {fn();});
-        return this;
+        let p = this.constructor;
+        return this.then(
+            value => p.resolve(fn()).then(() => value, () => value),
+            reason => p.resolve(fn()).then(() => { throw reason},() => { throw reason})
+        );
     }
     static all(values) {
         return new yPromise((resolve, reject) => {

@@ -1,5 +1,5 @@
 //交集
-var newArr2 = nums1.filter((item) => {
+var newArr2 = nums1 =>nums2 => nums1.filter((item) => {
     return nums2.includes(item);
 });
 //大小写取反
@@ -100,6 +100,71 @@ function listToTree(list){
 	}
 	return res;
 }
+
+
+function create() { 
+	let con = [].shift.call(arguments);
+	let obj = Object.create(null);
+	obj.__proto__ = con.prototype;
+	let res = con.apply(obj,arguments)
+	return res instanceof Object ? res:obj
+}
+
+
+function currying(fn, length) { 
+    length = length || fn.length;
+    return function (...args) { 
+        return args.length >= length
+            ? fn.apply(this, args)
+            : currying(fn.bind(this, ...args),length-args.length)
+    }
+}
+
+
+
+
+
+
+function add(...a) {
+	let sum = [...a].reduce((x, y) => x + y);
+	function least(...b) { 
+		sum = [...b].reduce((x, y) => x + y, sum);
+		return least
+	}
+	least.toString = () => { 
+		return sum
+	}
+	return least
+  }
+
+
+
+var inherit = (function (c, p) {
+	var F = function () { };
+	return function (c, p) { 
+		F.prototype = p.prototype;
+		c.prototype = new F();
+		c.uber = p.prototype;
+		c.prototype.constructor = c;
+	}
+})();
+
+
+function myFetch(url, mode = "GET", header = undefined) { 
+	return new Promise((resolve, reject) => {
+		const xhr = XMLHttpRequest(url);
+		if (header !== undefined) {
+			for (const item of header) { 
+				xhr.setRequestHeader(item.type, item.params);
+			}
+		}
+		xhr.open(mode, url);
+		xhr.onload = () => resolve(xhr.responseText);
+		xhr.onerror = () => reject(xhr.statusText);
+		xhr.send();
+	})
+}
+
 
 
 export default tools;

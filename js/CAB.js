@@ -39,4 +39,3 @@ Function.prototype.myBind = function(context){
     return fn
 }
 
-export default CAB;

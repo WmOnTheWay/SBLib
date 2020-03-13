@@ -34,17 +34,9 @@ function throttle(fn, delay, immediate) {
         clearTimeout(timer);
     }
     return throttled;
-
 }
 
-function currying(fn, length) { 
-    length = length || fn.length;
-    return function (...args) { 
-        return args.length >= length
-            ? fn.apply(this, args)
-            : currying(fn.bind(this, ...args),length-args.length)
-    }
-}
+
 
 
 
