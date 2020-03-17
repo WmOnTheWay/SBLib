@@ -39,3 +39,24 @@ Function.prototype.myBind = function(context){
     return fn
 }
 
+Function.prototype.myBind = function (context) {
+
+    if (typeof this !== 'function') { 
+        throw new TypeError("It is not callable!");
+    }
+
+    let fP = function () { };
+    const _this = this;
+    const args = [...arguments].slice(1);
+    let fn = function () { 
+        let Args = [...arguments];
+        _this.apply(this instanceof fP ? this : context, args.concat(Args));
+    }
+    fP.prototype = _this.prototype;
+    fn.prototype = new fP();
+    return fn
+}
+  
+
+
+

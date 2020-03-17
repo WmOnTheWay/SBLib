@@ -42,5 +42,6 @@ function throttle(fn, delay, immediate) {
 
 
 
+
 export default debounce;
 export default throttle;
